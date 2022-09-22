@@ -1,0 +1,16 @@
+version: "3.8"
+
+
+services:
+  web:
+    build: ..
+    image: fba/production:v1
+    restart: "no"
+    env_file:
+      - ${ENV_FILE}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    links:
+      - db
