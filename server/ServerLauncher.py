@@ -38,7 +38,7 @@ class Server:
         self.SGI_CONFIG = {
             'bind': os.environ.get('BIND', '0.0.0.0:5000'),
             'workers': self.WORKERS,
-            'worker_class': "sync",
+            'worker_class': "gevent",
         }
 
     @staticmethod
@@ -114,7 +114,7 @@ class Server:
                 'accesslog': self.ACCESS_LOG,
                 'errorlog': self.ERROR_LOG
             })
-            SGIapp(app_factory, self.SGI_CONFIG).run()
+            SGIapp(app_factory(), self.SGI_CONFIG).run()
             return
 
         if run_env == "development":
@@ -123,7 +123,7 @@ class Server:
                 'debug': True,
                 'loglevel': 'info',
             })
-            SGIapp(app_factory, self.SGI_CONFIG).run()
+            SGIapp(app_factory(), self.SGI_CONFIG).run()
             return
 
         app = app_factory()

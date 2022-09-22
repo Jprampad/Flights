@@ -1,0 +1,8 @@
+enabled = "yes"
+
+[settings]
+url_prefix = "/"
+template_folder = "templates"
+static_folder = "static"
+
+[session]
